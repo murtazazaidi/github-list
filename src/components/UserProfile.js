@@ -16,11 +16,13 @@ class UserProfile extends Component {
 
   componentDidMount() {
     const {
-      selectedUser, isLoadingUserRepos, fetchedSelectedUserRepo, fetchUserRepos,
+      selectedUser, isLoadingUserRepos, fetchedSelectedUserRepo,
+      fetchUser, fetchUserRepos,
     } = this.props;
     this.checkPermission(selectedUser);
 
     if (selectedUser && !isLoadingUserRepos && !fetchedSelectedUserRepo) {
+      fetchUser(selectedUser.login);
       fetchUserRepos(selectedUser.reposUrl);
     }
   }

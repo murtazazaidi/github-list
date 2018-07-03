@@ -25,7 +25,7 @@ const fetchUserRepos = reposUrl => ((dispatch) => {
     })
     .catch((error) => {
       notification.error({
-        message: 'Search Failed',
+        message: 'Failed to load repositories',
         description: (error && error.message) || error,
       });
       dispatch(fetchUserReposFailed());

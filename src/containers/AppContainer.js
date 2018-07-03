@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import App from 'components/App';
 
 function mapStateToProps(state) {
-  const { users } = state;
+  const { user } = state;
   return {
-    selectedUser: users.selectedUser,
+    selectedUser: user.selectedUser,
   };
 }
 const AppContainer = connect(mapStateToProps)(App);

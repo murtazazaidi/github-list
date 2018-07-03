@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
-import usersReducer from 'store/reducers/usersReducer';
+import searchReducer from 'store/reducers/searchReducer';
+import userReducer from 'store/reducers/userReducer';
 
 const rootReducer = combineReducers({
-  users: usersReducer,
+  user: userReducer,
+  search: searchReducer,
+
 });
 
 export default rootReducer;

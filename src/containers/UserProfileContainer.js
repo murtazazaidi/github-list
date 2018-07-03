@@ -2,21 +2,23 @@ import { connect } from 'react-redux';
 
 import UserProfile from 'components/UserProfile';
 
+import { fetchUserAction } from 'store/actions/UserActions';
 import { fetchUserReposAction } from 'store/actions/RepoActions';
 
 function mapStateToProps(state) {
-  const { users } = state;
+  const { user } = state;
   return {
-    selectedUser: users.selectedUser,
-    isLoadingUserRepos: users.isLoadingUserRepos,
-    selectedUserRepos: users.selectedUserRepos,
-    selectedUserRepoCount: users.selectedUserRepoCount,
-    fetchedSelectedUserRepo: users.fetchedSelectedUserRepo,
+    selectedUser: user.selectedUser,
+    isLoadingUserRepos: user.isLoadingUserRepos,
+    selectedUserRepos: user.selectedUserRepos,
+    selectedUserRepoCount: user.selectedUserRepoCount,
+    fetchedSelectedUserRepo: user.fetchedSelectedUserRepo,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    fetchUser: username => dispatch(fetchUserAction(username)),
     fetchUserRepos: reposUrl => dispatch(fetchUserReposAction(reposUrl)),
   };
 }

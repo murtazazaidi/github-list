@@ -3,17 +3,19 @@ import { connect } from 'react-redux';
 import UserSearch from 'components/UserSearch';
 
 import {
-  searchUserAction, clearSearchAction, updateSelectedUserAction,
+  searchUserAction, clearSearchAction,
 } from 'store/actions/SearchActions';
 
+import { updateSelectedUserAction } from 'store/actions/UserActions';
+
 function mapStateToProps(state) {
-  const { users } = state;
+  const { search, user } = state;
   return {
-    usersList: users.usersList,
-    totalCount: users.totalCount,
-    isSearchingUser: users.isSearchingUser,
-    searchTerm: users.userSearchTerm,
-    selectedUser: users.selectedUser,
+    usersList: search.usersList,
+    totalCount: search.totalCount,
+    isSearchingUser: search.isSearchingUser,
+    searchTerm: search.userSearchTerm,
+    selectedUser: user.selectedUser,
   };
 }
 
