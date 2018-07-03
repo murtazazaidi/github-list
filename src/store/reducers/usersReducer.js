@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import * as userLabels from 'action-labels/userLabels';
+import * as searchLabels from 'action-labels/searchLabels';
 import * as repoLabels from 'action-labels/repoLabels';
 
 const initialState = {
@@ -16,27 +16,27 @@ const initialState = {
 
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
-    case userLabels.CLEAR_SEARCH: {
+    case searchLabels.CLEAR_SEARCH: {
       state = Object.assign({}, initialState);
       return state;
     }
-    case userLabels.SEARCH_USER_INIT: {
+    case searchLabels.SEARCH_USER_INIT: {
       state = Object.assign({}, initialState, {
         isSearchingUser: true,
         userSearchTerm: action.data,
       });
       return state;
     }
-    case userLabels.SEARCH_USER_SUCCESS: {
+    case searchLabels.SEARCH_USER_SUCCESS: {
       const { usersList, totalCount } = action.data;
       state = Object.assign({}, state, { usersList, totalCount, isSearchingUser: false });
       return state;
     }
-    case userLabels.SEARCH_USER_FAILED: {
+    case searchLabels.SEARCH_USER_FAILED: {
       state = Object.assign({}, initialState, { isSearchingUser: false });
       return state;
     }
-    case userLabels.UPDATE_SELECTED_USER: {
+    case searchLabels.UPDATE_SELECTED_USER: {
       const selectedUser = action.data;
       state = Object.assign({}, state, {
         selectedUser,

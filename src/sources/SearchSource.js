@@ -5,11 +5,11 @@ import {
   searchUserSuccess,
   searchUserFailed,
   clearSearchAction,
-} from 'store/actions/UserActions';
+} from 'store/actions/SearchActions';
 
 import { SEARCH_USER_URL } from 'config/urls';
 
-import normalizeUsers from 'normalizers/usersList';
+import normalizeUsers from 'normalizers/searchUsersList';
 
 const searchUser = q => ((dispatch) => {
   if (!q) {

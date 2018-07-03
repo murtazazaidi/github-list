@@ -1,4 +1,4 @@
-import searchUser from 'sources/UserSource';
+import searchUser from 'sources/SearchSource';
 
 import {
   SEARCH_USER_INIT,
@@ -6,7 +6,7 @@ import {
   SEARCH_USER_FAILED,
   UPDATE_SELECTED_USER,
   CLEAR_SEARCH,
-} from 'action-labels/userLabels';
+} from 'action-labels/searchLabels';
 
 // normal actions
 export const searchUserInit = userSearchTerm => ({

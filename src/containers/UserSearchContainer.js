@@ -4,7 +4,7 @@ import UserSearch from 'components/UserSearch';
 
 import {
   searchUserAction, clearSearchAction, updateSelectedUserAction,
-} from 'store/actions/UserActions';
+} from 'store/actions/SearchActions';
 
 function mapStateToProps(state) {
   const { users } = state;
