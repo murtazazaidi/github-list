@@ -1,0 +1,11 @@
+.profile-image {
+  border-radius: 6px;
+  width: 230px;
+  height: 230px;
+  margin-bottom: 20px;
+}
+
+.profile-image-container {
+  overflow: auto;
+  margin-right: 5%;
+}

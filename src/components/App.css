@@ -1,0 +1,52 @@
+.layout {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  min-height: 86vh;
+  padding: 0 50px;
+}
+
+.content {
+  background: #fff;
+  padding: 24px;
+  min-height: 80vh;
+}
+
+.logo {
+  width: 31px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  float: left;
+  background: url('../logo.png');
+  background-size: cover;
+}
+
+.logo-vertical {
+  height: 48px;
+  margin: 16px;
+  background: url('../logo.png');
+  background-size: cover;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin-right: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  background: red;
+}
+
+.not-found {
+  text-align: center;
+  margin: 30px auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    min-height: 92vh;
+    padding: 0 50px;
+  }
+}
