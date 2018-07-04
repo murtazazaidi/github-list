@@ -5,6 +5,9 @@ const { Meta } = Card;
 
 const UserCard = (props) => {
   const { user, selectUser } = props;
+
+  if (!user) return <div />;
+
   return (
     <Card
       key={user.id}

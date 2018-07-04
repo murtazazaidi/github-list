@@ -31,6 +31,8 @@ const getTooltippedText = (text, maxLength) => {
 const RepoCard = (props) => {
   const { repo } = props;
 
+  if (!repo) return <div />;
+
   return (
     <a key={repo.id} target="_blank" rel="noopener noreferrer" href={repo.url}>
       <Card
