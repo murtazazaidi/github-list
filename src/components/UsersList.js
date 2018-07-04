@@ -7,6 +7,7 @@ const UsersList = (props) => {
   const {
     usersList, isSearchingUser, searchTerm, selectUser,
   } = props;
+
   let cardsContent = [];
 
   if (isSearchingUser) {
@@ -30,7 +31,7 @@ const UsersList = (props) => {
   }
   return (
     <div>
-      <Row type="flex" justify="space-around">
+      <Row type="flex" justify="space-between">
         {cardsContent}
       </Row>
     </div>);

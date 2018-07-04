@@ -10,7 +10,7 @@ const UserRepositories = (props) => {
 
   if (isLoadingUserRepos) {
     return (
-      <Row type="flex" justify="space-around" align="top">
+      <Row type="flex" justify="space-between" align="top">
         <Card loading style={{ width: 340, height: 180, margin: 10 }} />
       </Row>
     );
@@ -25,7 +25,7 @@ const UserRepositories = (props) => {
   }
 
   return (
-    <Row type="flex" justify="space-around" align="top">
+    <Row type="flex" justify="space-between" align="top">
       {selectedUserRepos.map(repo => <RepoCard key={repo.id} repo={repo} />)}
     </Row>
   );
