@@ -9,3 +9,15 @@
   overflow: auto;
   margin-right: 5%;
 }
+
+.profile-username {
+  color: #666;
+}
+
+.profile-username:hover {
+  color: #e46107;
+}
+
+.profile-icon {
+  padding-right: 10px;
+}

@@ -30,17 +30,6 @@ export default function usersReducer(state = initialState, action) {
       state = Object.assign({}, initialState, { isSearchingUser: false });
       return state;
     }
-    case searchLabels.UPDATE_SELECTED_USER: {
-      const selectedUser = action.data;
-      state = Object.assign({}, state, {
-        selectedUser,
-        selectedUserRepos: null,
-        isLoadingUserRepos: false,
-        selectedUserRepoCount: 0,
-        fetchedSelectedUserRepo: false,
-      });
-      return state;
-    }
 
     default:
       return state;

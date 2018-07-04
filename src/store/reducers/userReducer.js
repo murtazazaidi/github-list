@@ -4,10 +4,12 @@ import * as repoLabels from 'action-labels/repoLabels';
 
 const initialState = {
   selectedUser: null,
+  isLoadingUser: false,
+  fetchedSelectedUser: false,
+  isLoadingUserRepos: false,
+  fetchedSelectedUserRepos: false,
   selectedUserRepos: null,
   selectedUserRepoCount: 0,
-  isLoadingUserRepos: false,
-  fetchedSelectedUserRepo: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -16,10 +18,35 @@ export default function userReducer(state = initialState, action) {
       const selectedUser = action.data;
       state = Object.assign({}, state, {
         selectedUser,
-        selectedUserRepos: null,
+        isLoadingUser: false,
         isLoadingUserRepos: false,
+        selectedUserRepos: null,
         selectedUserRepoCount: 0,
-        fetchedSelectedUserRepo: false,
+        fetchedSelectedUserRepos: false,
+        fetchedSelectedUser: false,
+      });
+      return state;
+    }
+    case userLabels.FETCH_USER_INIT: {
+      state = Object.assign({}, state, {
+        isLoadingUser: true,
+        fetchedSelectedUser: false,
+      });
+      return state;
+    }
+    case userLabels.FETCH_USER_SUCCESS: {
+      const user = action.data;
+      state = Object.assign({}, state, {
+        selectedUser: user,
+        isLoadingUser: false,
+        fetchedSelectedUser: true,
+      });
+      return state;
+    }
+    case userLabels.FETCH_USER_FAILED: {
+      state = Object.assign({}, state, {
+        isLoadingUser: false,
+        fetchedSelectedUser: false,
       });
       return state;
     }
@@ -28,7 +55,7 @@ export default function userReducer(state = initialState, action) {
         iselectedUserRepos: null,
         selectedUserRepoCount: 0,
         isLoadingUserRepos: true,
-        fetchedSelectedUserRepo: false,
+        fetchedSelectedUserRepos: false,
       });
       return state;
     }
@@ -38,7 +65,7 @@ export default function userReducer(state = initialState, action) {
         selectedUserRepos: reposList,
         selectedUserRepoCount: reposList.length,
         isLoadingUserRepos: false,
-        fetchedSelectedUserRepo: true,
+        fetchedSelectedUserRepos: true,
       });
       return state;
     }
@@ -47,7 +74,7 @@ export default function userReducer(state = initialState, action) {
         iselectedUserRepos: null,
         selectedUserRepoCount: 0,
         isLoadingUserRepos: false,
-        fetchedSelectedUserRepo: false,
+        fetchedSelectedUserRepos: false,
       });
       return state;
     }

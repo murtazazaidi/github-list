@@ -21,7 +21,7 @@ const fetchUser = userName => ((dispatch) => {
     })
     .then((response) => {
       if (response.status === 200 && response.data) {
-        const usersNormalized = normalizeUsers(response.data);
+        const usersNormalized = normalizeUsers([response.data]);
         dispatch(fetchUserSuccess(usersNormalized[0]));
       } else {
         dispatch(fetchUserFailed());

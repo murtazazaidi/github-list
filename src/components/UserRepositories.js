@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  Card, Row, Col, Icon,
+  Card, Row, Col,
 } from 'antd';
 
-import { shorten } from 'utils/stringUtils';
+import StarIcon from 'react-icons/lib/go/star';
 
 import colors from 'config/colors';
 
@@ -29,7 +29,7 @@ const UserRepositories = (props) => {
   }
 
   return (
-    <Row type="flex" justify="start" align="top">
+    <Row type="flex" justify="space-around" align="top">
       {selectedUserRepos.map(repo => (
         <Card
           key={repo.id}
@@ -38,17 +38,25 @@ const UserRepositories = (props) => {
             width: 340, height: 180, margin: 10,
           }}
         >
-          <Row style={{ height: 20 }}>
-            <span style={{ fontSize: 14, color: '#006dd6' }}>
+          <Row>
+            <div
+              className="block-with-text"
+              style={{ height: 40, fontSize: 14, color: '#006dd6' }}
+            >
               {repo.name}
-            </span>
+            </div>
           </Row>
-          <Row style={{ height: 70, margin: '8px 0' }}>
-            <span className="truncate" style={{ fontSize: 12, color: '#576068' }}>
-              {shorten(repo.description)}
-            </span>
+          <Row>
+            <div
+              className="block-with-text"
+              style={{
+                height: 120, fontSize: 12, color: '#576068', margin: '8px 0',
+              }}
+            >
+              {repo.description}
+            </div>
           </Row>
-          <Row style={{ height: 20 }}>
+          <Row>
             <Col
               span={12}
               style={{ color: '#63666d' }}
@@ -57,7 +65,7 @@ const UserRepositories = (props) => {
               {repo.language}
             </Col>
             <Col span={6}>
-              <Icon type="star-o" style={{ paddingRight: 6 }} />
+              <StarIcon style={{ paddingRight: 6, width: 20 }} />
               <span style={{ color: '#63666d' }}>
                 {repo.starsCount}
               </span>

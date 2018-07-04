@@ -86,7 +86,7 @@ class UserSearch extends Component {
     }
     return (
       <div style={{ padding: '30px' }}>
-        <Row type="flex" justify="start">
+        <Row type="flex" justify="space-around">
           {cardsContent}
         </Row>
       </div>);
@@ -98,42 +98,44 @@ class UserSearch extends Component {
 
     return (
       <div>
-        <Row>
-          <Col xs={24} sm={12} md={6} lg={6}>
-            <h1>
-              Search User
-            </h1>
-          </Col>
-          <Col
-            xs={24}
-            sm={12}
-            md={{ span: 6, offset: 12 }}
-            lg={{ span: 6, offset: 12 }}
-          >
-            <Input.Search
-              placeholder="Enter username"
-              prefix={<Icon key="prefix" type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              suffix={userName ? <Icon key="postfix" type="close-circle" style={{ marginRight: 5 }} onClick={this.emitEmpty} /> : null}
-              value={userName}
-              onChange={this.onChange}
-              onSearch={this.onSearch}
-              enterButton
+        <div className="page-header">
+          <Row>
+            <Col xs={24} sm={12} md={6} lg={6}>
+              <h1>
+                Search User
+              </h1>
+            </Col>
+            <Col
+              xs={24}
+              sm={12}
+              md={{ span: 6, offset: 12 }}
+              lg={{ span: 6, offset: 12 }}
+            >
+              <Input.Search
+                placeholder="Enter username"
+                prefix={<Icon key="prefix" type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                suffix={userName ? <Icon key="postfix" type="close-circle" style={{ marginRight: 5 }} onClick={this.emitEmpty} /> : null}
+                value={userName}
+                onChange={this.onChange}
+                onSearch={this.onSearch}
+                enterButton
+              />
+            </Col>
+          </Row>
+          <Divider>
+            User
+            {totalCount !== 1 ? 's' : ''}
+            <Badge
+              count={totalCount}
+              style={{
+                marginLeft: 10,
+                backgroundColor: '#fff',
+                color: '#999',
+                boxShadow: '0 0 0 1px #d9d9d9 inset',
+              }}
             />
-          </Col>
-        </Row>
-        <Divider>
-          User
-          {totalCount !== 1 ? 's' : ''}
-          <Badge
-            count={totalCount}
-            style={{
-              marginLeft: 10,
-              backgroundColor: '#fff',
-              color: '#999',
-              boxShadow: '0 0 0 1px #d9d9d9 inset',
-            }}
-          />
-        </Divider>
+          </Divider>
+        </div>
         <Row>
           {this.renderUsersList()}
         </Row>

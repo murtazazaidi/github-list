@@ -23,7 +23,8 @@ const store = createStore(
 
 store.subscribe(throttle(() => {
   saveState({
-    users: store.getState().users,
+    search: store.getState().search,
+    user: store.getState().user,
   });
 }, 3000));
 

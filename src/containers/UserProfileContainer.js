@@ -9,10 +9,12 @@ function mapStateToProps(state) {
   const { user } = state;
   return {
     selectedUser: user.selectedUser,
+    isLoadingUser: user.isLoadingUser,
+    fetchedSelectedUser: user.fetchedSelectedUser,
     isLoadingUserRepos: user.isLoadingUserRepos,
+    fetchedSelectedUserRepos: user.fetchedSelectedUserRepos,
     selectedUserRepos: user.selectedUserRepos,
     selectedUserRepoCount: user.selectedUserRepoCount,
-    fetchedSelectedUserRepo: user.fetchedSelectedUserRepo,
   };
 }
 

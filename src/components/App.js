@@ -68,7 +68,6 @@ class App extends React.Component {
         <Affix>
           <Header>
             <div className="logo" />
-
             <NonMobile>
               <Menu
                 theme="dark"
@@ -100,7 +99,7 @@ class App extends React.Component {
         <Layout>
           <Layout className="layout">
             <Content className="container">
-              <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb className="breadcrumbs">
                 {breadcrumbItems}
               </Breadcrumb>
               <div className="content">

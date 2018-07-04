@@ -8,10 +8,17 @@
   padding: 0 50px;
 }
 
+.breadcrumbs {
+  margin: 16px 0px;
+}
+
 .content {
   background: #fff;
-  padding: 24px;
   min-height: 80vh;
+}
+
+.page-header {
+  padding: 24px;
 }
 
 .logo {
@@ -47,6 +54,10 @@
 @media only screen and (max-width: 767px) {
   .container {
     min-height: 92vh;
-    padding: 0 50px;
+    padding: 0px;
+  }
+
+  .breadcrumbs {
+    margin: 16px 20px;
   }
 }
