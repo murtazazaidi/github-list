@@ -18,7 +18,7 @@
 }
 
 .page-header {
-  padding: 24px;
+  padding: 24px 24px 0 24px;
 }
 
 .logo {
@@ -49,6 +49,10 @@
 .not-found {
   text-align: center;
   margin: 30px auto;
+}
+
+.block-with-text {
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 767px) {

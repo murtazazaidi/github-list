@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Row, Col, Input, Icon, Divider, Card, Badge,
+  Row, Col, Input, Icon, Divider, Badge,
 } from 'antd';
 
-const { Meta } = Card;
+import UsersList from 'components/UsersList';
 
 const DEFAULT_SEARCH = '';
 
@@ -48,53 +48,11 @@ class UserSearch extends Component {
     history.push('/user-profile');
   }
 
-  renderUsersList = () => {
-    const { usersList, isSearchingUser, searchTerm } = this.props;
-    let cardsContent = [];
-
-    if (isSearchingUser) {
-      cardsContent = [1, 2, 3, 4, 5]
-        .map(k => (<Card key={k} loading style={{ width: 260, margin: 10 }} />));
-    } else if (!usersList.length) {
-      if (!searchTerm) {
-        return (
-          <div className="not-found">
-            Search for any Github User
-          </div>);
-      }
-      return (
-        <div className="not-found">
-          No users found
-        </div>);
-    } else {
-      usersList.forEach((user) => {
-        cardsContent.push((
-          <Card
-            key={user.id}
-            hoverable
-            style={{ width: 260, margin: 10 }}
-            cover={<img alt={user.login} src={user.pictureUrl} />}
-            onClick={() => this.selectUser(user)}
-          >
-            <Meta
-              title={user.login}
-              description={user.githubUrl}
-            />
-          </Card>
-        ));
-      });
-    }
-    return (
-      <div style={{ padding: '30px' }}>
-        <Row type="flex" justify="space-around">
-          {cardsContent}
-        </Row>
-      </div>);
-  }
-
   render() {
     const { userName } = this.state;
-    const { totalCount } = this.props;
+    const {
+      totalCount, usersList, searchTerm, isSearchingUser,
+    } = this.props;
 
     return (
       <div>
@@ -114,7 +72,7 @@ class UserSearch extends Component {
               <Input.Search
                 placeholder="Enter username"
                 prefix={<Icon key="prefix" type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                suffix={userName ? <Icon key="postfix" type="close-circle" style={{ marginRight: 5 }} onClick={this.emitEmpty} /> : null}
+                suffix={userName ? <Icon key="postfix" type="close-circle" style={{ marginRight: 12 }} onClick={this.emitEmpty} /> : null}
                 value={userName}
                 onChange={this.onChange}
                 onSearch={this.onSearch}
@@ -137,7 +95,12 @@ class UserSearch extends Component {
           </Divider>
         </div>
         <Row>
-          {this.renderUsersList()}
+          <UsersList
+            selectUser={this.selectUser}
+            usersList={usersList}
+            isSearchingUser={isSearchingUser}
+            searchTerm={searchTerm}
+          />
         </Row>
       </div>);
   }

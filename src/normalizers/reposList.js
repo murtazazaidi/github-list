@@ -1,8 +1,8 @@
 const normalizeRepo = repo => ({
   id: repo.id,
   name: repo.name,
-  url: repo.url,
   fullName: repo.full_name,
+  url: repo.html_url,
   cloneUrl: repo.clone_url,
   createdAt: repo.created_at,
   updatedAt: repo.updated_at,
