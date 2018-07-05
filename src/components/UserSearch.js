@@ -81,7 +81,13 @@ class UserSearch extends Component {
               <Input.Search
                 placeholder="Enter username"
                 prefix={<Icon key="prefix" type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                suffix={userName ? <Icon key="postfix" type="close-circle" style={{ marginRight: 12 }} onClick={this.emitEmpty} /> : null}
+                suffix={userName ? (
+                  <Icon
+                    key="postfix"
+                    type="close-circle"
+                    style={{ marginRight: 12 }}
+                    onClick={this.emitEmpty}
+                  />) : null}
                 value={userName}
                 onChange={this.onChange}
                 onSearch={this.onSearch}
