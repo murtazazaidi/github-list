@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { notification } from 'antd';
+import http from 'utils/httpUtils';
 import {
   searchUserInit,
   searchMoreUserInit,
@@ -22,11 +22,9 @@ const searchUser = (q, pageNo = 1) => ((dispatch) => {
   } else {
     dispatch(searchMoreUserInit(q));
   }
-  axios
+  http
     .get(SEARCH_USER_URL, {
       params: { q, page: pageNo },
-      headers: { Accept: 'application/vnd.github.mercy-preview+json' },
-      timeout: 10000,
     })
     .then((response) => {
       if (response.status === 200 && response.data) {

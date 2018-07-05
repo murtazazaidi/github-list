@@ -25,7 +25,8 @@ class UserSearch extends Component {
   }
 
   onSearch = (userName, pageNo = 1) => {
-    const { searchUser, isSearchingUser } = this.props;
+    const { searchUser, isSearchingUser, searchTerm } = this.props;
+    if (searchTerm === userName && pageNo === 1) return;
     if (!isSearchingUser) searchUser(userName, pageNo);
   }
 
@@ -93,8 +94,7 @@ class UserSearch extends Component {
             {totalCount !== 1 ? 's' : ''}
             <Badge
               count={totalCount}
-              overflowCount={99999}
-              showZero
+              overflowCount={999999}
               style={{
                 marginLeft: 10,
                 backgroundColor: '#fff',

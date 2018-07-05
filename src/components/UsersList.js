@@ -18,6 +18,11 @@ const UsersList = (props) => {
         <div className="not-found">
           Search for any Github User
         </div>);
+    } else {
+      return (
+        <div className="not-found">
+          No user found in search
+        </div>);
     }
   } else {
     usersList.forEach((user) => {

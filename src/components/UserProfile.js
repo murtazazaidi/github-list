@@ -62,8 +62,7 @@ class UserProfile extends Component {
             Repositories
             <Badge
               count={selectedUserRepoCount}
-              overflowCount={99999}
-              showZero
+              overflowCount={999999}
               style={{
                 marginLeft: 10,
                 backgroundColor: '#fff',

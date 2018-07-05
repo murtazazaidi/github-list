@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { notification } from 'antd';
+import http from 'utils/httpUtils';
 import {
   fetchUserInit,
   fetchUserSuccess,
@@ -14,11 +14,8 @@ const fetchUser = userName => ((dispatch) => {
   if (!userName) return;
   dispatch(fetchUserInit(userName));
   const url = `${USERS_URL}${userName}`;
-  axios
-    .get(url, {
-      headers: { Accept: 'application/vnd.github.mercy-preview+json' },
-      timeout: 10000,
-    })
+  http
+    .get(url)
     .then((response) => {
       if (response.status === 200 && response.data) {
         const usersNormalized = normalizeUsers([response.data]);

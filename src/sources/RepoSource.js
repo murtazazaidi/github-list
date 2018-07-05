@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { notification } from 'antd';
+import http from 'utils/httpUtils';
 import {
   fetchUserReposInit,
   fetchUserReposSuccess,
@@ -14,11 +14,9 @@ const fetchUserRepos = (reposUrl, pageNo = 1) => ((dispatch) => {
     return;
   }
   dispatch(fetchUserReposInit());
-  axios
+  http
     .get(reposUrl, {
-      headers: { Accept: 'application/vnd.github.mercy-preview+json' },
       params: { page: pageNo },
-      timeout: 10000,
     })
     .then((response) => {
       if (response.status === 200 && response.data) {
