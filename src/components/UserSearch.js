@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Row, Col, Input, Icon, Divider, Badge,
+  Button, Row, Col, Input, Icon, Divider, Badge,
 } from 'antd';
 
 import UsersList from 'components/UsersList';
@@ -24,10 +24,15 @@ class UserSearch extends Component {
     if (userName && !isSearchingUser && !searchTerm) searchUser(userName);
   }
 
-  onSearch = () => {
+  onSearch = (userName, pageNo = 1) => {
     const { searchUser, isSearchingUser } = this.props;
+    if (!isSearchingUser) searchUser(userName, pageNo);
+  }
+
+  onSearchMore = () => {
+    const { pageNo } = this.props;
     const { userName } = this.state;
-    if (!isSearchingUser) searchUser(userName);
+    this.onSearch(userName, pageNo + 1);
   }
 
   onChange = (e) => {
@@ -53,6 +58,9 @@ class UserSearch extends Component {
     const {
       totalCount, usersList, searchTerm, isSearchingUser,
     } = this.props;
+
+    const showLoadMore = !!(searchTerm && usersList && usersList.length
+      && totalCount > usersList.length);
 
     return (
       <div>
@@ -85,6 +93,8 @@ class UserSearch extends Component {
             {totalCount !== 1 ? 's' : ''}
             <Badge
               count={totalCount}
+              overflowCount={99999}
+              showZero
               style={{
                 marginLeft: 10,
                 backgroundColor: '#fff',
@@ -102,6 +112,19 @@ class UserSearch extends Component {
             searchTerm={searchTerm}
           />
         </Row>
+        {showLoadMore && (
+          <Row type="flex" justify="space-around">
+            <Button
+              style={{ margin: 10 }}
+              type="primary"
+              size="large"
+              loading={isSearchingUser}
+              onClick={() => (this.onSearchMore())}
+            >
+              Load More
+            </Button>
+          </Row>
+        )}
       </div>);
   }
 }

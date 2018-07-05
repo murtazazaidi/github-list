@@ -9,21 +9,16 @@ const UsersList = (props) => {
   } = props;
 
   let cardsContent = [];
-
-  if (isSearchingUser) {
-    cardsContent = [1, 2, 3, 4, 5]
-      .map(k => (<Card key={k} loading style={{ width: 260, margin: 10 }} />));
-  } else if (!usersList.length) {
-    if (!searchTerm) {
+  if (!usersList || !usersList.length) {
+    if (isSearchingUser) {
+      cardsContent = [1, 2, 3, 4, 5]
+        .map(k => (<Card key={k} loading style={{ width: 260, margin: 10 }} />));
+    } else if (!searchTerm) {
       return (
         <div className="not-found">
           Search for any Github User
         </div>);
     }
-    return (
-      <div className="not-found">
-        No users found
-      </div>);
   } else {
     usersList.forEach((user) => {
       cardsContent.push(<UserCard key={user.id} user={user} selectUser={selectUser} />);

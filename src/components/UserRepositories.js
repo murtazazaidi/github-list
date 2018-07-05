@@ -5,7 +5,7 @@ import {
 
 import RepoCard from 'components/RepoCard';
 
-const loadingRepo = (
+const loadingRepoCard = (
   <Row type="flex" justify="space-around" align="top">
     <Card loading style={{ width: 340, height: 180, margin: 10 }} />
   </Row>
@@ -15,7 +15,7 @@ const UserRepositories = (props) => {
   const { isLoadingUserRepos, selectedUserRepos } = props;
 
   if (isLoadingUserRepos && (!selectedUserRepos || !selectedUserRepos.length)) {
-    return loadingRepo;
+    return loadingRepoCard;
   }
 
   if (!selectedUserRepos || !selectedUserRepos.length) {

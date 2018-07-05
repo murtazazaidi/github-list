@@ -6,6 +6,7 @@ const initialState = {
   usersList: [],
   totalCount: 0,
   isSearchingUser: false,
+  pageNo: 1,
 };
 
 export default function usersReducer(state = initialState, action) {
@@ -21,13 +22,26 @@ export default function usersReducer(state = initialState, action) {
       });
       return state;
     }
+    case searchLabels.SEARCH_MORE_USER_INIT: {
+      state = Object.assign({}, state, {
+        isSearchingUser: true,
+        userSearchTerm: action.data,
+      });
+      return state;
+    }
     case searchLabels.SEARCH_USER_SUCCESS: {
-      const { usersList, totalCount } = action.data;
-      state = Object.assign({}, state, { usersList, totalCount, isSearchingUser: false });
+      const { usersList, totalCount, pageNo } = action.data;
+      const updatedList = state.usersList.concat(usersList);
+      state = Object.assign({}, state, {
+        pageNo,
+        totalCount,
+        usersList: updatedList,
+        isSearchingUser: false,
+      });
       return state;
     }
     case searchLabels.SEARCH_USER_FAILED: {
-      state = Object.assign({}, initialState, { isSearchingUser: false });
+      state = Object.assign({}, state, { isSearchingUser: false });
       return state;
     }
 

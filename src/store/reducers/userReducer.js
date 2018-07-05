@@ -12,7 +12,6 @@ const initialState = {
   selectedUserRepos: [],
   selectedUserRepoCount: 0,
   pageNo: 1,
-  pageSize: 30,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -28,7 +27,6 @@ export default function userReducer(state = initialState, action) {
         isLoadingUser: false,
         isLoadingUserRepos: false,
         pageNo: 1,
-        pageSize: 30,
         selectedUserRepos: [],
         selectedUserRepoCount: 0,
         fetchedSelectedUser: false,

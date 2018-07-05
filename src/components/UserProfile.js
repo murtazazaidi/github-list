@@ -41,12 +41,12 @@ class UserProfile extends Component {
     const {
       selectedUser, selectedUserRepos, selectedUserRepoCount,
       isLoadingUser, isLoadingUserRepos,
-      fetchUserRepos, pageNo, pageSize,
+      fetchUserRepos, pageNo,
     } = this.props;
 
-    const showLoadMore = !!selectedUserRepoCount && selectedUserRepos
-      && !!selectedUserRepos.length
-      && selectedUserRepoCount > pageNo * pageSize;
+    const showLoadMore = !!(selectedUserRepoCount && selectedUserRepos
+      && selectedUserRepos.length
+      && selectedUserRepoCount > selectedUserRepos.length);
 
     return (
       <div>
@@ -62,6 +62,8 @@ class UserProfile extends Component {
             Repositories
             <Badge
               count={selectedUserRepoCount}
+              overflowCount={99999}
+              showZero
               style={{
                 marginLeft: 10,
                 backgroundColor: '#fff',

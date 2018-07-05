@@ -15,13 +15,14 @@ function mapStateToProps(state) {
     totalCount: search.totalCount,
     isSearchingUser: search.isSearchingUser,
     searchTerm: search.userSearchTerm,
+    pageNo: search.pageNo,
     selectedUser: user.selectedUser,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    searchUser: query => dispatch(searchUserAction(query)),
+    searchUser: (query, pageNo) => dispatch(searchUserAction(query, pageNo)),
     clearSearch: query => dispatch(clearSearchAction(query)),
     updateSelectedUser: user => dispatch(updateSelectedUserAction(user)),
   };

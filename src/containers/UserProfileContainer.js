@@ -16,7 +16,6 @@ function mapStateToProps(state) {
     selectedUserRepos: user.selectedUserRepos,
     selectedUserRepoCount: user.selectedUserRepoCount,
     pageNo: user.pageNo,
-    pageSize: user.pageSize,
   };
 }
 
