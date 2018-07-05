@@ -5,18 +5,20 @@ import {
 
 import RepoCard from 'components/RepoCard';
 
+const loadingRepo = (
+  <Row type="flex" justify="space-around" align="top">
+    <Card loading style={{ width: 340, height: 180, margin: 10 }} />
+  </Row>
+);
+
 const UserRepositories = (props) => {
   const { isLoadingUserRepos, selectedUserRepos } = props;
 
-  if (isLoadingUserRepos) {
-    return (
-      <Row type="flex" justify="space-between" align="top">
-        <Card loading style={{ width: 340, height: 180, margin: 10 }} />
-      </Row>
-    );
+  if (isLoadingUserRepos && (!selectedUserRepos || !selectedUserRepos.length)) {
+    return loadingRepo;
   }
 
-  if (!selectedUserRepos) {
+  if (!selectedUserRepos || !selectedUserRepos.length) {
     return (
       <div className="not-found">
         No repositories available
@@ -25,7 +27,7 @@ const UserRepositories = (props) => {
   }
 
   return (
-    <Row type="flex" justify="space-between" align="top">
+    <Row type="flex" justify="space-around" align="top">
       {selectedUserRepos.map(repo => <RepoCard key={repo.id} repo={repo} />)}
     </Row>
   );

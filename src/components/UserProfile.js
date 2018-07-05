@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Badge, Divider,
+  Badge, Button, Divider, Row,
 } from 'antd';
 
 import UserDetails from 'components/UserDetails';
@@ -17,14 +17,16 @@ class UserProfile extends Component {
     const {
       selectedUser,
       isLoadingUser, fetchedSelectedUser,
-      isLoadingUserRepos, fetchedSelectedUserRepos,
+      isLoadingUserRepos, fetchedSelectedUserReposOnce,
       fetchUser, fetchUserRepos,
     } = this.props;
     this.checkPermission(selectedUser);
 
-    if (selectedUser && !isLoadingUserRepos && !fetchedSelectedUserRepos) {
+    if (selectedUser && !isLoadingUserRepos && !fetchedSelectedUserReposOnce) {
       if (!isLoadingUser && !fetchedSelectedUser) fetchUser(selectedUser.login);
-      if (!isLoadingUserRepos && !fetchedSelectedUserRepos) fetchUserRepos(selectedUser.reposUrl);
+      if (!isLoadingUserRepos && !fetchedSelectedUserReposOnce) {
+        fetchUserRepos(selectedUser.reposUrl);
+      }
     }
   }
 
@@ -39,7 +41,12 @@ class UserProfile extends Component {
     const {
       selectedUser, selectedUserRepos, selectedUserRepoCount,
       isLoadingUser, isLoadingUserRepos,
+      fetchUserRepos, pageNo, pageSize,
     } = this.props;
+
+    const showLoadMore = !!selectedUserRepoCount && selectedUserRepos
+      && !!selectedUserRepos.length
+      && selectedUserRepoCount > pageNo * pageSize;
 
     return (
       <div>
@@ -68,6 +75,19 @@ class UserProfile extends Component {
           isLoadingUserRepos={isLoadingUserRepos}
           selectedUserRepos={selectedUserRepos}
         />
+        {showLoadMore && (
+          <Row type="flex" justify="space-around">
+            <Button
+              style={{ margin: 10 }}
+              type="primary"
+              size="large"
+              loading={isLoadingUserRepos}
+              onClick={() => (fetchUserRepos(selectedUser.reposUrl, pageNo + 1))}
+            >
+              Load More
+            </Button>
+          </Row>
+        )}
       </div>);
   }
 }

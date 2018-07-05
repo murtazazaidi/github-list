@@ -8,17 +8,25 @@ import {
 
 import normalizeRepos from 'normalizers/reposList';
 
-const fetchUserRepos = reposUrl => ((dispatch) => {
+const fetchUserRepos = (reposUrl, pageNo = 1) => ((dispatch) => {
+  if (!reposUrl) {
+    dispatch(fetchUserReposFailed());
+    return;
+  }
   dispatch(fetchUserReposInit());
   axios
     .get(reposUrl, {
       headers: { Accept: 'application/vnd.github.mercy-preview+json' },
+      params: { page: pageNo },
       timeout: 10000,
     })
     .then((response) => {
       if (response.status === 200 && response.data) {
-        const reposNormalized = normalizeRepos(response.data);
-        dispatch(fetchUserReposSuccess(reposNormalized));
+        const reposList = normalizeRepos(response.data);
+        dispatch(fetchUserReposSuccess({
+          pageNo,
+          reposList,
+        }));
       } else {
         dispatch(fetchUserReposFailed());
       }

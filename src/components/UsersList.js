@@ -31,7 +31,7 @@ const UsersList = (props) => {
   }
   return (
     <div>
-      <Row type="flex" justify="space-between">
+      <Row type="flex" justify="space-around">
         {cardsContent}
       </Row>
     </div>);

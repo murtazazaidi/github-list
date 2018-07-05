@@ -1,29 +1,38 @@
 /* eslint-disable no-param-reassign */
 import * as userLabels from 'action-labels/userLabels';
 import * as repoLabels from 'action-labels/repoLabels';
+import * as searchLabels from 'action-labels/searchLabels';
 
 const initialState = {
-  selectedUser: null,
   isLoadingUser: false,
-  fetchedSelectedUser: false,
   isLoadingUserRepos: false,
-  fetchedSelectedUserRepos: false,
-  selectedUserRepos: null,
+  fetchedSelectedUser: false,
+  fetchedSelectedUserReposOnce: false,
+  selectedUser: null,
+  selectedUserRepos: [],
   selectedUserRepoCount: 0,
+  pageNo: 1,
+  pageSize: 30,
 };
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case searchLabels.CLEAR_SEARCH: {
+      state = Object.assign({}, initialState);
+      return state;
+    }
     case userLabels.UPDATE_SELECTED_USER: {
       const selectedUser = action.data;
       state = Object.assign({}, state, {
         selectedUser,
         isLoadingUser: false,
         isLoadingUserRepos: false,
-        selectedUserRepos: null,
+        pageNo: 1,
+        pageSize: 30,
+        selectedUserRepos: [],
         selectedUserRepoCount: 0,
-        fetchedSelectedUserRepos: false,
         fetchedSelectedUser: false,
+        fetchedSelectedUserReposOnce: false,
       });
       return state;
     }
@@ -31,6 +40,7 @@ export default function userReducer(state = initialState, action) {
       state = Object.assign({}, state, {
         isLoadingUser: true,
         fetchedSelectedUser: false,
+        selectedUserRepoCount: 0,
       });
       return state;
     }
@@ -38,6 +48,7 @@ export default function userReducer(state = initialState, action) {
       const user = action.data;
       state = Object.assign({}, state, {
         selectedUser: user,
+        selectedUserRepoCount: user.publicRepos,
         isLoadingUser: false,
         fetchedSelectedUser: true,
       });
@@ -47,34 +58,31 @@ export default function userReducer(state = initialState, action) {
       state = Object.assign({}, state, {
         isLoadingUser: false,
         fetchedSelectedUser: false,
+        selectedUserRepoCount: 0,
       });
       return state;
     }
     case repoLabels.FETCH_USER_REPOS_INIT: {
       state = Object.assign({}, state, {
-        iselectedUserRepos: null,
-        selectedUserRepoCount: 0,
+        pageNo: 1,
         isLoadingUserRepos: true,
-        fetchedSelectedUserRepos: false,
       });
       return state;
     }
     case repoLabels.FETCH_USER_REPOS_SUCCESS: {
-      const reposList = action.data;
+      const { reposList, pageNo } = action.data;
+      const updatedList = state.selectedUserRepos.concat(reposList);
       state = Object.assign({}, state, {
-        selectedUserRepos: reposList,
-        selectedUserRepoCount: reposList.length,
+        pageNo,
+        selectedUserRepos: updatedList,
         isLoadingUserRepos: false,
-        fetchedSelectedUserRepos: true,
+        fetchedSelectedUserReposOnce: true,
       });
       return state;
     }
     case repoLabels.FETCH_USER_REPOS_FAILED: {
       state = Object.assign({}, state, {
-        iselectedUserRepos: null,
-        selectedUserRepoCount: 0,
         isLoadingUserRepos: false,
-        fetchedSelectedUserRepos: false,
       });
       return state;
     }

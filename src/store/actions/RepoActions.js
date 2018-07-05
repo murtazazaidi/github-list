@@ -21,4 +21,4 @@ export const fetchUserReposFailed = data => ({
   data,
 });
 
-export const fetchUserReposAction = reposUrl => fetchUserRepos(reposUrl);
+export const fetchUserReposAction = (reposUrl, pageNo) => fetchUserRepos(reposUrl, pageNo);

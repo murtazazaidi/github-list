@@ -12,16 +12,18 @@ function mapStateToProps(state) {
     isLoadingUser: user.isLoadingUser,
     fetchedSelectedUser: user.fetchedSelectedUser,
     isLoadingUserRepos: user.isLoadingUserRepos,
-    fetchedSelectedUserRepos: user.fetchedSelectedUserRepos,
+    fetchedSelectedUserReposOnce: user.fetchedSelectedUserReposOnce,
     selectedUserRepos: user.selectedUserRepos,
     selectedUserRepoCount: user.selectedUserRepoCount,
+    pageNo: user.pageNo,
+    pageSize: user.pageSize,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchUser: username => dispatch(fetchUserAction(username)),
-    fetchUserRepos: reposUrl => dispatch(fetchUserReposAction(reposUrl)),
+    fetchUserRepos: (reposUrl, pageNo) => dispatch(fetchUserReposAction(reposUrl, pageNo)),
   };
 }
 
